@@ -83,6 +83,9 @@ function selectTimeConverter(data: TimedData[]): TimeConverter | null {
 }
 
 export function convertTime(time: Time): TimePoint {
+	if (isString(time)) {
+		time = stringToBusinessDay(time);
+	}
 	if (isBusinessDay(time)) {
 		return businessDayConverter(time);
 	}
