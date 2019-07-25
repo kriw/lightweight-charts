@@ -834,7 +834,7 @@ export class PriceScale {
 
 			const startBar = visibleBars.firstBar();
 			const endBar = visibleBars.lastBar();
-			let sourceRange = source.priceRange(startBar, endBar);
+			let sourceRange = source.autoscaleInfo(startBar, endBar).priceRange;
 
 			if (sourceRange !== null) {
 				switch (this._options.mode) {
