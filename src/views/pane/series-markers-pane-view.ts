@@ -160,7 +160,7 @@ export class SeriesMarkersPaneView implements IUpdatablePaneView {
 			if (dataAt === null) {
 				continue;
 			}
-			this._data.items[index].y = calcuateY(marker, dataAt, offsets, shapeMargin, priceScale, timeScale, firstValue);
+			this._data.items[index].y = calcuateY(marker, dataAt, offsets, shapeMargin, priceScale, timeScale, firstValue.value);
 		}
 		this._invalidated = false;
 	}

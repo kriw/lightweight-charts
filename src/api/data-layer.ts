@@ -84,8 +84,8 @@ function selectTimeConverter(data: TimedData[]): TimeConverter | null {
 
 export function convertTime(time: Time): TimePoint {
 	if (isUTCTimestamp(time)) {
-	return timestampConverter(time);
-}
+		return timestampConverter(time);
+	}
 
 	if (!isBusinessDay(time)) {
 		return businessDayConverter(stringToBusinessDay(time));
