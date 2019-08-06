@@ -401,17 +401,9 @@ export class Series<T extends SeriesType = SeriesType> extends PriceDataSource i
 		return this._priceAxisViews;
 	}
 
-	public autoscaleInfo(startTimePoint: TimePointIndex, endTimePoint: TimePointIndex): AutoscaleInfo {
-		if (!isInteger(startTimePoint)) {
-			return new AutoscaleInfo(null);
-		}
-
-		if (!isInteger(endTimePoint)) {
-			return new AutoscaleInfo(null);
-		}
-
-		if (this.data().isEmpty()) {
-			return new AutoscaleInfo(null);
+	public autoscaleInfo(startTimePoint: TimePointIndex, endTimePoint: TimePointIndex): AutoscaleInfo | null {
+		if (!isInteger(startTimePoint) || !isInteger(endTimePoint) || this.data().isEmpty()) {
+			return null;
 		}
 
 		// TODO: refactor this
@@ -432,8 +424,10 @@ export class Series<T extends SeriesType = SeriesType> extends PriceDataSource i
 			range = range !== null ? range.merge(rangeWithBase) : rangeWithBase;
 		}
 
-		const margins = this._markersPaneView.autoScaleMargins() as Coordinate;
-		return new AutoscaleInfo(range, margins, margins);
+		return {
+			priceRange: range,
+			margins: this._markersPaneView.autoScaleMargins(),
+		};
 	}
 
 	public minMove(): number {
