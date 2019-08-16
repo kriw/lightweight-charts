@@ -1,5 +1,7 @@
 import { DeepPartial } from '../helpers/strict-type-checks';
 
+import { BarPrice } from '../model/bar';
+import { Coordinate } from '../model/coordinate';
 import { PriceScaleOptions } from '../model/price-scale';
 
 /** Interface to control chart's price scale */
@@ -15,4 +17,6 @@ export interface IPriceScaleApi {
 	 * @returns full set of currently applied options, including defaults
 	 */
 	options(): Readonly<PriceScaleOptions>;
+
+	coordinateToPrice(coordinate: Coordinate, baseValue: number): BarPrice;
 }
